@@ -1,11 +1,22 @@
 import pytube
+import re
 
+def is_link_valid(link):
+  video_regex = r'(https?://)?(www\.)?youtube\.com/watch\?v=.*'
+  short_regex = r'(https?://)?(www\.)?youtu\.be/.*'
+
+  pattern = f"({'|'.join([video_regex, short_regex])})"
+
+  if re.match(pattern, link):
+    return True
+  else:
+    return False
 while True:
     print("Enter YouTube URL, or press Enter to exit:")
     video_url = input()
     if video_url == '':
         break
-    else:
+    elif is_link_valid(video_url):
         print("Choose folder: 1) Code Videos, 2) Tech Videos, 3) Maker Videos, 4) General Videos:")
         destination_folder = int(input())
         youtube = pytube.YouTube(video_url)
@@ -24,4 +35,6 @@ while True:
             print("Video saved to Code_Vids!")
         else:
             print("Invalid Choice...")
+    else:
+      print("Invalid YouTube link, try again")
 print("Thank you for using YouTubeCopier! Shutting down...")
