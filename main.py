@@ -1,7 +1,7 @@
 import pytube
 import re
 
-base_folder = '~/Documents/Videos/'
+base_folder = '/home/Andrew/Videos/'
 
 def is_link_valid(link):
   video_regex = r'(https?://)?(www\.)?youtube\.com/watch\?v=.*'
