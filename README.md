@@ -1,6 +1,6 @@
-#YouTube Copier
+# YouTube Copier
 
-###Overview
+### Overview
 
 This is a simple Python app for downloading
 YouTube Videos to a specified folder. If you
@@ -10,7 +10,7 @@ you should update the folder names! You might
 love coding, tech, and maker videos as much as I
 do, but you should name them whatever you want.
 
-###Local Setup
+### Local Setup
 
 Obviously you will want to have python3 and pip installed,
 but you will also want to install PyTube if you have not
