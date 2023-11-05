@@ -1,6 +1,8 @@
 import pytube
 import re
 
+base_folder = '~/Documents/Videos/'
+
 def is_link_valid(link):
   video_regex = r'(https?://)?(www\.)?youtube\.com/watch\?v=.*'
   short_regex = r'(https?://)?(www\.)?youtu\.be/.*'
@@ -11,6 +13,7 @@ def is_link_valid(link):
     return True
   else:
     return False
+
 while True:
     print("Enter YouTube URL, or press Enter to exit:")
     video_url = input()
@@ -22,17 +25,17 @@ while True:
         youtube = pytube.YouTube(video_url)
         video = youtube.streams.first()
         if destination_folder == 1:
-            video.download('C:\\Users\\Andre\\Documents\\Downloaded_Vids\\Code_Vids')
+            video.download(base_folder + 'Code_Vids')
             print("Video saved to Code_Vids!")
         elif destination_folder == 2:
-            video.download('C:\\Users\\Andre\\Documents\\Downloaded_Vids\\Tech_Vids')
-            print("Video saved to Code_Vids!")
+            video.download(base_folder + 'Tech_Vids')
+            print("Video saved to Tech_Vids!")
         elif destination_folder == 3:
-            video.download('C:\\Users\\Andre\\Documents\\Downloaded_Vids\\Maker_Vids')
-            print("Video saved to Code_Vids!")
+            video.download(base_folder + 'Maker_Vids')
+            print("Video saved to Maker_Vids!")
         elif destination_folder == 4:
-            video.download('C:\\Users\\Andre\\Documents\\Downloaded_Vids\\General_Vids')
-            print("Video saved to Code_Vids!")
+            video.download(base_folder + 'General_Vids')
+            print("Video saved to General_Vids!")
         else:
             print("Invalid Choice...")
     else:
