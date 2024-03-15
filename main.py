@@ -1,7 +1,7 @@
 import pytube
 import re
 
-base_folder = '/home/Andrew/Videos/'
+base_folder = '/media/seagate/Jellyfin/'
 
 def is_link_valid(link):
   video_regex = r'(https?://)?(www\.)?youtube\.com/watch\?v=.*'
@@ -20,10 +20,11 @@ while True:
     if video_url == '':
         break
     elif is_link_valid(video_url):
-        print("Choose folder: 1) Code Videos, 2) Tech Videos, 3) Maker Videos, 4) General Videos:")
+        print("Choose folder: 1) Code Videos, 2) Tech Videos, 3) Science Videos, 4) General Videos:")
         destination_folder = int(input())
         youtube = pytube.YouTube(video_url)
-        video = youtube.streams.first()
+        streams = youtube.streams.filter(progressive=True, file_extension='mp4').order_by('resolution').desc()
+        video = streams.first()
         if destination_folder == 1:
             video.download(base_folder + 'Code_Vids')
             print("Video saved to Code_Vids!")
@@ -31,8 +32,8 @@ while True:
             video.download(base_folder + 'Tech_Vids')
             print("Video saved to Tech_Vids!")
         elif destination_folder == 3:
-            video.download(base_folder + 'Maker_Vids')
-            print("Video saved to Maker_Vids!")
+            video.download(base_folder + 'Science_Vids')
+            print("Video saved to Science_Vids!")
         elif destination_folder == 4:
             video.download(base_folder + 'General_Vids')
             print("Video saved to General_Vids!")

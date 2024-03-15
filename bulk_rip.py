@@ -3,7 +3,7 @@ import pytube
 import re
 import json
 
-base_folder = '/media/external_drive_main/Jellyfin/'
+base_folder = '/media/seagate/Jellyfin/'
 
 def is_link_valid(link):
     playlist_regex = r'(https?://)?(www\.)?youtube\.com/playlist\?list=.*'
@@ -25,8 +25,9 @@ def download_video(video_url, destination_folder):
     youtube = pytube.YouTube(video_url)
     video_id = youtube.video_id
     if not is_video_downloaded(video_id, destination_folder):
-        video = youtube.streams.first()
-        video.download(base_folder + destination_folder)
+        streams = youtube.streams.filter(progressive=True, file_extension='mp4').order_by('resolution').desc()
+        highest_resolution_stream = streams.first()
+        highest_resolution_stream.download(base_folder + destination_folder)
         print(f"Video saved to {destination_folder}!")
     else:
         print("Video already downloaded, skipping...")
